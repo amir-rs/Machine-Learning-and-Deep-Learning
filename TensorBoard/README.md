@@ -4,7 +4,7 @@ This repository contains a Python script for training and testing reinforcement 
 
 ## Overview
 
-The script allows you to train and test reinforcement learning algorithms such as A2C, TD3, and SAC on various Gym environments. It provides options to specify the Gym environment, algorithm, and whether to train or test a model.
+The script enables you to train and test reinforcement learning algorithms such as A2C, TD3, and SAC on various Gym environments. It provides options to specify the Gym environment, algorithm, and whether to train or test a model.
 
 ## Installation
 
