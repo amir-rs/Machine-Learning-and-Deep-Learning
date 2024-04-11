@@ -3,13 +3,27 @@ import gym
 from stable_baselines3 import A2C, TD3, SAC
 import os
 
+# Directories for saving models and logs
 log_dir = "logs"
 model_dir = "models"
 
+# Create directories if they don't exist
 os.makedirs(model_dir, exist_ok=True)
 os.makedirs(log_dir, exist_ok=True)
 
 def train(env, algorithm, timesteps):
+    """
+    Function to train a reinforcement learning model using the specified algorithm.
+
+    Args:
+        env (str): Name of the Gym environment.
+        algorithm (str): Name of the algorithm to use (A2C, TD3, SAC).
+        timesteps (int): Number of training steps.
+
+    Returns:
+        None
+    """
+    # Select the appropriate algorithm
     if algorithm == 'A2C':
         model = A2C('MlpPolicy', env, verbose=1, device='cuda', tensorboard_log=log_dir)
     elif algorithm == 'TD3':
@@ -23,10 +37,24 @@ def train(env, algorithm, timesteps):
     i = 0
     while True:
         i += 1
+        # Train the model for the specified number of timesteps
         model.learn(total_timesteps=timesteps, reset_num_timesteps=False)
+        # Save the model
         model.save(f"{model_dir}/{algorithm}_{timesteps * i}")
 
 def test(env, algorithm, model_path):
+    """
+    Function to test a pre-trained reinforcement learning model.
+
+    Args:
+        env (str): Name of the Gym environment.
+        algorithm (str): Name of the algorithm used for training.
+        model_path (str): Path to the pre-trained model.
+
+    Returns:
+        None
+    """
+    # Load the pre-trained model
     if algorithm == 'A2C':
         model = A2C.load(model_path, env=env)
     elif algorithm == 'TD3':
@@ -37,6 +65,7 @@ def test(env, algorithm, model_path):
         print("Algorithm not found.")
         exit(1)
     
+    # Run the model in the environment and render the output
     obs = env.reset()
     steps = 500
     while steps > 0:
@@ -48,7 +77,7 @@ def test(env, algorithm, model_path):
             steps -= 1
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Choose Train or Test a Model using Stable Baselines3 and Gym environment")
+    parser = argparse.ArgumentParser(description="Train or test a reinforcement learning model using Stable Baselines3 and Gym environment")
     parser.add_argument("gymenv", help="Name of the Gym environment (e.g., Humanoid-v4, CartPole-v1)")
     parser.add_argument("algorithm", help="Choose an algorithm: A2C, TD3, SAC")
     parser.add_argument("-t", "--train", action='store_true', help="Train the model")
@@ -58,33 +87,16 @@ if __name__ == '__main__':
 
     if args.train:
         print("Training started...")
+        # Create the Gym environment
         gymenv = gym.make(args.gymenv)
+        # Train the model
         train(gymenv, args.algorithm, args.steps)
         print("Training completed.")
     
     if args.test:
         print("Testing started...")
+        # Create the Gym environment
         gymenv = gym.make(args.gymenv)
+        # Test the pre-trained model
         test(gymenv, args.algorithm, model_path=args.test)
         print("Testing completed.")
-
-'''
-requirement : pip install 'shimmy>=0.2.1'
-The correct usage of the script is as follows: python main.py <gymenv> <algorithm> [-t | -e <model_path>] [-s <steps>]
-
-
-Additionally, you can provide optional arguments:
-
--t to train the model
--e <model_path> to test a pre-trained model
--s <steps> to specify the number of training steps (default is 20000)
-
-For example, to train an A2C model on the CartPole-v1 environment with 50000 steps, you would run:
-python main.py CartPole-v1 A2C -t -s 50000
-
-Or to test a pre-trained model on the CartPole-v1 environment, you would run:
-python main.py CartPole-v1 A2C -e path_to_model
-
-Make sure to replace path_to_model with the actual path to your pre-trained model.
-
-'''
