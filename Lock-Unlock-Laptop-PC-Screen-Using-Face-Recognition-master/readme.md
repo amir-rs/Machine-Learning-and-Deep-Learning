@@ -22,7 +22,8 @@ This project allows you to automatically lock or unlock your laptop/PC screen ba
 
 
 
-![Screenshot](Lock-Unlock-Laptop-PC-Screen-Using-Face-Recognition-master/Screenshot 2024-08-31 211203.png)
+![Screenshot](https://github.com/amir-rs/Machine-Learning-and-Deep-Learning/blob/master/Lock-Unlock-Laptop-PC-Screen-Using-Face-Recognition-master/Screenshot%202024-08-31%20211203.png)
+
 ## Usage
 
 To start the program, simply run the Python script:
