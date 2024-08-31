@@ -35,7 +35,7 @@ NumPy
 pyautogui
 YOLO model
 You can install the dependencies using:
-![Screenshot 2024-08-31 211203](https://github.com/user-attachments/assets/8341e8e4-be3a-4e71-a85e-1b48aa40ca7d)
+![Screenshot](/Screenshot 2024-08-31 211203.png)
 
 bash
 pip install opencv-python-headless numpy pyautogui
