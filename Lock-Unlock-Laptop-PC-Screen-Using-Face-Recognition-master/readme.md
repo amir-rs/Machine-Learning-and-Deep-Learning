@@ -1,11 +1,11 @@
-# Lock-Unlock Screen Using Face Recognition
+# Lock-Unlock Apps Using Face Recognition
 
 This project allows you to automatically lock or unlock your laptop/PC screen based on face recognition. Using a webcam, the system detects your face and performs the desired action (lock/unlock) using a trained YOLO model.
 
 ## Features
 
 - **Real-time Face Detection**: Uses YOLO for accurate and fast face recognition.
-- **Screen Lock/Unlock**: Automatically locks or unlocks the screen based on the detected face.
+- **Apps Lock/Unlock**: Automatically locks or unlocks the apps based on the detected face.
 
 ## Installation
 
