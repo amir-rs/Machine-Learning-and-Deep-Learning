@@ -20,6 +20,9 @@ This project allows you to automatically lock or unlock your laptop/PC screen ba
 3. Download the YOLO model and place it in the correct directory:
     - Ensure the model file `yolov8n-face.pt` is placed in the appropriate folder as specified in the code.
 
+
+
+![Screenshot](/Screenshot 2024-08-31 211203.png)
 ## Usage
 
 To start the program, simply run the Python script:
@@ -35,7 +38,6 @@ NumPy
 pyautogui
 YOLO model
 You can install the dependencies using:
-![Screenshot](/Screenshot 2024-08-31 211203.png)
 
 bash
 pip install opencv-python-headless numpy pyautogui
