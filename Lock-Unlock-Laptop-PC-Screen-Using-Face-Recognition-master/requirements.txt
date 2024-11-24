@@ -7,7 +7,6 @@ pillow>=10.0.0
 
 # GUI and Interface
 customtkinter>=5.2.0
-tkinter>=8.6.0
 
 # System interactions
 psutil>=5.9.0
@@ -20,7 +19,10 @@ pyyaml>=6.0.1
 torch>=2.0.0
 torchvision>=0.15.0
 
-# Development dependencies (optional)
-pytest>=7.4.0
-black>=23.7.0
-flake8>=6.1.0
+# Mouse and keyboard control dependencies
+mouseinfo>=0.1.3
+pygetwindow>=0.0.9
+pymsgbox>=1.0.9
+pyperclip>=1.8.2
+pyrect>=0.2.0
+pyscreeze>=0.1.28
