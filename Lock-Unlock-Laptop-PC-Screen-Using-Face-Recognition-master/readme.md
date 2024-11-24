@@ -1,47 +1,160 @@
-# Lock-Unlock Apps Using Face Recognition
+# 🔒 Lock-Unlock Apps Using Face Recognition
 
-This project allows you to automatically lock or unlock your laptop/PC screen based on face recognition. Using a webcam, the system detects your face and performs the desired action (lock/unlock) using a trained YOLO model.
+<div align="center">
 
-## Features
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-green)
+![License](https://img.shields.io/badge/license-MIT-yellow)
+![YOLO](https://img.shields.io/badge/YOLO-v8-red)
 
-- **Real-time Face Detection**: Uses YOLO for accurate and fast face recognition.
-- **Apps Lock/Unlock**: Automatically locks or unlocks the apps based on the detected face.
+A sophisticated facial recognition system that automatically manages application access through real-time face detection and authentication.
 
-## Installation
+[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Configuration](#configuration) • [Contributing](#contributing)
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/amir-rs/Lock-Unlock-Laptop-PC-Screen-Using-Face-Recognition-master.git
-    ```
-2. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-3. Download the YOLO model and place it in the correct directory:
-    - Ensure the model file `yolov8n-face.pt` is placed in the appropriate folder as specified in the code.
-
-
+</div>
 
 ![Screenshot](https://github.com/amir-rs/Machine-Learning-and-Deep-Learning/blob/master/Lock-Unlock-Laptop-PC-Screen-Using-Face-Recognition-master/Screenshot%202024-08-31%20211203.png)
 
-## Usage
+## 🌟 Features
 
-To start the program, simply run the Python script:
+| Feature | Description |
+|---------|-------------|
+| 🎯 Real-time Face Detection | Uses YOLO v8 for accurate and fast face recognition |
+| 🔐 App Management | Automatic locking/unlocking based on face detection |
+| 📊 Custom Dataset Creation | Tools to create your own facial recognition dataset |
+| 🤖 Model Training | Built-in functionality to train custom models |
+| 🎨 Dark/Light Theme | Customizable UI appearance |
+| 📱 Multi-platform | Works on Windows, Linux, and macOS |
+
+## 🔄 System Architecture
+
+```mermaid
+graph LR
+    A[Webcam Input] --> B[YOLO Face Detection]
+    B --> C{Face Recognized?}
+    C -->|Yes| D[Unlock Apps]
+    C -->|No| E[Keep Locked]
+    D --> F[Monitor Apps]
+    E --> F
+    F --> G{App Launch Attempt?}
+    G -->|Yes| B
+    G -->|No| F
+```
+
+## 🛠️ Installation
+
+### Prerequisites
+
+```mermaid
+graph TD
+    A[Prerequisites] --> B[Python 3.8+]
+    A --> C[Webcam]
+    A --> D[GPU Optional]
+    B --> E[Dependencies]
+    E --> F[OpenCV]
+    E --> G[NumPy]
+    E --> H[PyAutoGUI]
+    E --> I[Ultralytics YOLO]
+```
+
+### Step-by-Step Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/amir-rs/Lock-Unlock-Laptop-PC-Screen-Using-Face-Recognition-master.git
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Model Setup:**
+   ```bash
+   # Download YOLO model
+   wget https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n-face.pt
+   ```
+
+## 📋 Configuration Options
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `face_confidence` | 0.7 | Minimum confidence threshold for face detection |
+| `recognition_interval` | 8s | Time between recognition attempts |
+| `max_wrong_attempts` | 3 | Maximum failed recognition attempts |
+| `unlock_threshold` | 6 | Required successful recognitions to unlock |
+
+## 🚀 Usage
+
+### Basic Usage
 
 ```bash
-python lock_unlock_face_recognition.py
-Ensure your webcam is connected and working. The program will start detecting faces and perform the lock/unlock actions accordingly.
+python app.py
+```
 
-Dependencies
-Python 3.x
-OpenCV (cv2)
-NumPy
-pyautogui
-YOLO model
-You can install the dependencies using:
+### Program Flow
 
-bash
-pip install opencv-python-headless numpy pyautogui
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant Camera
+    participant YOLO
+    
+    User->>System: Launch Application
+    System->>Camera: Initialize Webcam
+    loop Face Detection
+        Camera->>YOLO: Frame
+        YOLO->>System: Detection Results
+        System->>System: Process Recognition
+    end
+    alt Face Recognized
+        System->>User: Unlock Apps
+    else Face Not Recognized
+        System->>User: Keep Locked
+    end
+```
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 🔧 Advanced Configuration
+
+### Model Training Parameters
+
+```yaml
+training:
+  epochs: 50
+  batch_size: 16
+  image_size: 640
+  learning_rate: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔍 Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Camera not detected | Check USB connection and permissions |
+| Model not loading | Verify YOLO model path and file existence |
+| High CPU usage | Adjust detection interval in configuration |
+| False detections | Increase face_confidence threshold |
